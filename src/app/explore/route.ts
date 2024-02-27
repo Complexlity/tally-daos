@@ -207,10 +207,11 @@ export async function POST(request: NextRequest) {
     const start = performance.now()
     const activeProposals = await getActiveProposals(chainId, currentGovernanceIds)
 
+    console.log({activeProposals})
     const end = performance.now()
     const time = end - start
     console.log("Time", time)
-    
+
 
 
     imageUrl = `${process.env.HOST}/images/explore?page=review`;
@@ -222,12 +223,14 @@ export async function POST(request: NextRequest) {
     }
 
     let returnedButtons;
+    const proposalId = activeProposals[0]?.id
     if (activeProposals.length == 1) {
+      console.log("I am here")
       returnedButtons = [
         {
           label: "Vote",
           action: "link",
-          target: `https://www.tally.xyz/gov/${current.slug}/proposal/${activeProposals[0].id}?chart=bubble`
+          target: `https://www.tally.xyz/gov/${current.slug}/proposal/${proposalId}?chart=bubble`
         },
         {
           label: "All Proposals",
@@ -241,7 +244,7 @@ export async function POST(request: NextRequest) {
         {
           label: "Vote",
           action: "link",
-          target: `https://www.tally.xyz/gov/${current.slug}/proposal/${activeProposals[0].id}?chart=bubble`
+          target: `https://www.tally.xyz/gov/${current.slug}/proposal/${proposalId}?chart=bubble`
         },
         {
           label: "Next",
