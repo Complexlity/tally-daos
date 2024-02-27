@@ -75,11 +75,11 @@ export interface Welcome {
 
 export interface Proposal {
   id: string;
-  slug: string;
   title: string;
   description: string;
   statusChanges: StatusChange[];
   voteStats: VoteStat[];
+  governance: {name: string, slug: string}
 }
 
 export interface StatusChange {
