@@ -35,16 +35,16 @@ export async function POST(request: NextRequest) {
 
 
   let imageUrl: string
-  let returnedFrame: Frame & {state? : any}
 
-  if (page === "explore") {
+
+
     console.log("initial state")
     console.log(state)
-    imageUrl = `${process.env.HOST}/images/explore?page=review`;
+    imageUrl = `${process.env.HOST}/images/explore?page=explore`;
     const nextState = `${encodeURIComponent(JSON.stringify(state))}`;
 
 
-     returnedFrame = {
+   let returnedFrame: Frame & {state?: string} = {
     image: imageUrl,
     version: "vNext",
     buttons: [
@@ -61,9 +61,9 @@ export async function POST(request: NextRequest) {
 
 
 
-  }
 
-  else if (page === "review") {
+
+  if (page === "review") {
     console.log("I am review")
     const inputTextNumber = Number(inputText)
     console.log({inputTextNumber})
@@ -90,9 +90,30 @@ export async function POST(request: NextRequest) {
 
     const activeProposals = await getActiveProposals(chainId, currentGovernanceIds)
     console.log({ activeProposals })
+
+
+    imageUrl = `${process.env.HOST}/images/explore?page=explore`;
+    const newState = {
+      active: activeProposals,
+      curr: 0
+    }
+        const nextState = `${encodeURIComponent(JSON.stringify(newState))}`;
+
+    returnedFrame = {
+      image: imageUrl,
+      version: "vNext",
+      buttons: [
+        {
+          label: "Go",
+          action: "post",
+        },
+      ],
+      inputText: "Enter chain number e.g 1, 2, 5",
+      postUrl: `${process.env.HOST}/explore?page=review`,
+      ogImage: imageUrl,
+      state: nextState,
+    };
   }
-
-
 
 
   return new NextResponse(getFrameHtml(returnedFrame), {
