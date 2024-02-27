@@ -1,0 +1,196 @@
+[
+  {
+    "name": "Arbitrum",
+    "slug": "arbitrum",
+    "metadata": {
+      "icon": "https://static.tally.xyz/b817e120-3169-47b5-a6c7-0bc42b7e0877_original.jpeg"
+    },
+    "governances": [
+      {
+        "id": "eip155:42161:0xf07DeD9dC292157749B6Fd268E37DF6EA38395B9",
+        "stats": {
+          "proposals": {
+            "active": 1,
+            "total": 13
+          },
+          "tokens": {
+            "owners": 927347,
+            "voters": 160983
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Optimism",
+    "slug": "optimism",
+    "metadata": {
+      "icon": "https://static.tally.xyz/4f89fa07-7d2a-4884-a9db-5484890f2b2f_original.png"
+    },
+    "governances": [
+      {
+        "id": "eip155:10:0xcDF27F107725988f2261Ce2256bDfCdE8B382B10",
+        "stats": {
+          "proposals": {
+            "active": 3,
+            "total": 23
+          },
+          "tokens": {
+            "owners": 1098178,
+            "voters": 108814
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Gitcoin",
+    "slug": "gitcoin",
+    "metadata": {
+      "icon": "https://static.tally.xyz/52fdf6fc-c2a4-4539-b36f-16c47f4c7de9_400x400.jpg"
+    },
+    "governances": [
+      {
+        "id": "eip155:1:0x9D4C63565D5618310271bF3F3c01b2954C1D1639",
+        "stats": {
+          "proposals": {
+            "active": 2,
+            "total": 24
+          },
+          "tokens": {
+            "owners": 92347,
+            "voters": 12346
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "SoftDAO",
+    "slug": "softdao",
+    "metadata": {
+      "icon": "https://static.tally.xyz/f8ee2903-7d35-4fbb-be50-f3a000647849_original.png"
+    },
+    "governances": [
+      {
+        "id": "eip155:1:0x0ADd6d42bBfe6c40e15B02A2C8A1b81B36a2B326",
+        "stats": {
+          "proposals": {
+            "active": 1,
+            "total": 4
+          },
+          "tokens": {
+            "owners": 3605,
+            "voters": 351
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Nouns Dao",
+    "slug": "nounsdao",
+    "metadata": {
+      "icon": "https://static.tally.xyz/1decbb17-b472-4eb9-9141-92c3f86770de_400x400.jpg"
+    },
+    "governances": [
+      {
+        "id": "eip155:1:0x6f3E6272A167e8AcCb32072d08E0957F9c79223d",
+        "stats": {
+          "proposals": {
+            "active": 1,
+            "total": 507
+          },
+          "tokens": {
+            "owners": 260,
+            "voters": 233
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Unlock",
+    "slug": "unlock",
+    "metadata": {
+      "icon": "https://static.tally.xyz/2f981707-a5e8-4b49-9d61-52120f2bce58_400x400.jpg"
+    },
+    "governances": [
+      {
+        "id": "eip155:1:0x440d9D4E66d39bb28FB58729Cb4D3ead2A595591",
+        "stats": {
+          "proposals": {
+            "active": 1,
+            "total": 16
+          },
+          "tokens": {
+            "owners": 4483,
+            "voters": 68
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Reflexer Ungovernor",
+    "slug": "reflexer-ungovernor",
+    "metadata": {
+      "icon": "https://static.tally.xyz/eba37ab8-f4ee-459a-8270-2c8d79690a72_original.png"
+    },
+    "governances": [
+      {
+        "id": "eip155:1:0x7a6BBe7fDd793CC9ab7e0fc33605FCd2D19371E8",
+        "stats": {
+          "proposals": {
+            "active": 1,
+            "total": 42
+          },
+          "tokens": {
+            "owners": 3756,
+            "voters": 28
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Exodus Town",
+    "governances": [
+      {
+        "id": "eip155:137:0x7E96f5242D1256E56E15b46EB2Fa1b1152dF5923",
+        "stats": {
+          "proposals": {
+            "active": 1,
+            "total": 2
+          },
+          "tokens": {
+            "owners": 31,
+            "voters": 17
+          }
+        }
+      }
+    ]
+  },
+  {
+    "name": "Spectral",
+    "slug": "spectral",
+    "metadata": {
+      "icon": null
+    },
+    "governances": [
+      {
+        "id": "eip155:1:0x8ca412156b9bfc9d049F47f0CAe9bA2d6466c6e5",
+        "stats": {
+          "proposals": {
+            "active": 1,
+            "total": 1
+          },
+          "tokens": {
+            "owners": 1,
+            "voters": 0
+          }
+        }
+      }
+    ]
+  }
+]
