@@ -67,3 +67,43 @@ export interface Metadata {
 }
 
 export type PickedOrgs = Pick<Organization, "name" | "governances">[]
+
+
+export interface Welcome {
+  proposals: Proposal[];
+}
+
+export interface Proposal {
+  id: string;
+  title: string;
+  description: string;
+  statusChanges: StatusChange[];
+  voteStats: VoteStat[];
+}
+
+export interface StatusChange {
+  type: Type;
+}
+
+export enum Type {
+  Active = "ACTIVE",
+  Defeated = "DEFEATED",
+  Empty = "",
+  Executed = "EXECUTED",
+  Pending = "PENDING",
+  Queued = "QUEUED",
+  Succeeded = "SUCCEEDED",
+}
+
+export interface VoteStat {
+  votes: string | number;
+  weight: string | number;
+  support: Support;
+  percent: number;
+}
+
+export enum Support {
+  Abstain = "ABSTAIN",
+  Against = "AGAINST",
+  For = "FOR",
+}
