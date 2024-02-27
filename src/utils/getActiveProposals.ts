@@ -36,9 +36,6 @@ export async function getActiveProposals(
     },
 	});
 
-	// console.log("uncleaned")
-	// console.log(result.proposals)
-
 	const activeProposals = cleanActiveProposals(result.proposals)
 	return activeProposals
 }
