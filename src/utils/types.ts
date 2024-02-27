@@ -65,3 +65,5 @@ export interface Tokens {
 export interface Metadata {
   icon: null | string;
 }
+
+export type PickedOrgs = Pick<Organization, "name" | "governances">[]

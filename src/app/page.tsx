@@ -1,3 +1,4 @@
+import { getActiveProposalOrganizations } from "@/utils/getActiveProposalsOrganizations";
 import { Frame, getFrameFlattened } from "frames.js";
 import type { Metadata } from "next";
 
@@ -11,7 +12,7 @@ const initialFrame: Frame = {
       action: "post",
     },
   ],
-  postUrl: `${process.env.HOST}/explore`,
+  postUrl: `${process.env.HOST}/explore?page=explore`,
 };
 
 // Export Next.js metadata
@@ -28,9 +29,7 @@ export const metadata: Metadata = {
   other: getFrameFlattened(initialFrame),
 };
 
-export default function Page() {
-  return (
-    <div>
-    </div>
-  );
+export default async function Page() {
+  const proposals = await getActiveProposalOrganizations();
+  return <div>{JSON.stringify(proposals)}</div>;
 }
