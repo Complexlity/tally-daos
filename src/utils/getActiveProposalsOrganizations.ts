@@ -14,10 +14,12 @@ function cleanGovernances(governors: Pokedex): PickedOrgs {
 
 	//Remove governors with 0 active proposals
   for (let i = 0; i < governances.length; i++) {
+
     let currOrg = governances[i].organization;
-    if (!currOrg) continue;
+    if (!currOrg || currOrg.name == "Optimism") continue;
     let currOrgGov = currOrg.governances;
     if (!currOrgGov) continue;
+
     for (let j = 0; j < currOrgGov.length; j++) {
       let currGov = currOrgGov[j];
       if (currGov.stats.proposals.active > 0) {
