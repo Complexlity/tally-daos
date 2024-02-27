@@ -43,6 +43,7 @@ function cleanGovernances(governors: Pokedex): PickedOrgs {
     let curr = activeGovernors[i];
     let currNew = {
       name: curr.name,
+      slug: curr.slug,
       governances: [
         ...curr.governances.filter((x) => x.stats.proposals.active > 0),
       ],

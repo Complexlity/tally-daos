@@ -23,10 +23,6 @@ export async function getActiveProposals(
       support
       percent
     }
-		governance{
-			name
-			slug
-		}
   }
 }`;
 

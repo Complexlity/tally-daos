@@ -66,7 +66,7 @@ export interface Metadata {
   icon: null | string;
 }
 
-export type PickedOrgs = Pick<Organization, "name" | "governances">[]
+export type PickedOrgs = Pick<Organization, "name" | "governances" | "slug">[]
 
 
 export interface Welcome {

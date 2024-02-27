@@ -22,20 +22,21 @@ export async function POST(request: NextRequest) {
 
   if (page === "proposal") {
     console.log("I am in proposal")
-    let state: {chainId: string, governanceIds: string[], next: number, last?: boolean}
+    let state: {chainId: string, governanceIds: string[], slug: string, next: number, last?: boolean}
     if (!serializedState) {
       state = {
         chainId: "eip155:42161",
         governanceIds: [
           "eip155:42161:0xf07DeD9dC292157749B6Fd268E37DF6EA38395B9",
         ],
+        slug: 'arbitrum',
         next: 1,
         last: false
       };
     } else {
       state = JSON.parse(
         decodeURIComponent(serializedState)
-      ) as unknown as {chainId: string, governanceIds: string[], next: number, last: boolean};
+      ) as unknown as {chainId: string, governanceIds: string[],slug: string, next: number, last: boolean};
     }
 
     console.log({state})
@@ -90,7 +91,7 @@ export async function POST(request: NextRequest) {
           {
             label: "Vote",
             action: "link",
-            target: `https://www.tally.xyz/gov/${current.governance.slug}/proposal/${current.id}?chart=bubble`
+            target: `https://www.tally.xyz/gov/${state.slug}/proposal/${current.id}?chart=bubble`
           },
           {
             label: "All Proposals",
@@ -103,7 +104,7 @@ export async function POST(request: NextRequest) {
           {
             label: "Vote",
             action: "link",
-            target: `https://www.tally.xyz/gov/${current.governance.slug}/proposal/${current.id}?chart=bubble`
+            target: `https://www.tally.xyz/gov/${state.slug}/proposal/${current.id}?chart=bubble`
           },
           {
             label: "Next",
@@ -212,9 +213,10 @@ export async function POST(request: NextRequest) {
 
 
     imageUrl = `${process.env.HOST}/images/explore?page=review`;
-    const newState: {chainId: string, governanceIds: string[], next: number, last?: boolean} = {
+    const newState: {chainId: string, governanceIds: string[],slug: string, next: number, last?: boolean} = {
       chainId,
       governanceIds: currentGovernanceIds,
+      slug: current.slug,
       next: 1,
     }
         const nextState = `${encodeURIComponent(JSON.stringify(newState))}`;
@@ -224,7 +226,7 @@ export async function POST(request: NextRequest) {
         {
           label: "Vote",
           action: "link",
-          target: `https://www.tally.xyz/gov/${activeProposals[0].governance.slug}/proposal/${activeProposals[0].id}?chart=bubble`
+          target: `https://www.tally.xyz/gov/${current.slug}/proposal/${activeProposals[0].id}?chart=bubble`
         },
         {
           label: "All Proposals",
@@ -238,7 +240,7 @@ export async function POST(request: NextRequest) {
         {
           label: "Vote",
           action: "link",
-          target: `https://www.tally.xyz/gov/${activeProposals[0].governance.slug}/proposal/${activeProposals[0].id}?chart=bubble`
+          target: `https://www.tally.xyz/gov/${current.slug}/proposal/${activeProposals[0].id}?chart=bubble`
         },
         {
           label: "Next",
