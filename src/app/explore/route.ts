@@ -77,9 +77,10 @@ export async function POST(request: NextRequest) {
       const next = activeProposals[state.next + 1]
 
       let imageUrl = `${process.env.HOST}/images/explore?page=proposals&curr=${next}`;
-      const newState: { chainId: string, governanceIds: string[], next: number, last?: boolean } = {
+      const newState: { chainId: string, governanceIds: string[], slug: string, next: number, last?: boolean } = {
         chainId: state.chainId,
         governanceIds: state.governanceIds,
+        slug: state.slug,
         next: state.next + 1,
       }
 
