@@ -141,8 +141,9 @@ export async function POST(request: NextRequest) {
     let state: State
     if (!serializedState) {
       console.log("State not found")
-      state = JSON.parse(decodeURIComponent(dummyState[0])) as unknown as State
-      // state = await getActiveProposalOrganizations() as unknown as State;
+      // state =
+      //   JSON.parse(decodeURIComponent(dummyState[0])) as unknown as State
+      state = await getActiveProposalOrganizations() as unknown as State;
 
     }
     else {
