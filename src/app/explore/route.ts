@@ -219,7 +219,7 @@ export async function POST(request: NextRequest) {
       slug: current.slug,
       next: 1,
     }
-        const nextState = `${encodeURIComponent(JSON.stringify(newState))}`;
+
     let returnedButtons;
     if (activeProposals.length == 1) {
       returnedButtons = [
@@ -252,6 +252,7 @@ export async function POST(request: NextRequest) {
         }
       ]
     }
+    const nextState = `${encodeURIComponent(JSON.stringify(newState))}`;
     returnedFrame = {
       image: imageUrl,
       version: "vNext",
