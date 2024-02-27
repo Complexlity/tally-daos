@@ -2,8 +2,8 @@ import { Proposal, StatusChange, Type } from "./types";
 import { fetcher } from "./fetcher";
 
 export async function getActiveProposals(
-  chainId: string = "eip155:42161",
-	governanceIds = ["eip155:42161:0xf07DeD9dC292157749B6Fd268E37DF6EA38395B9"],
+  chainId: string,
+	governanceIds : string[],
 	lean = false
 ) {
   const governorProposalsDocument = `
@@ -14,6 +14,8 @@ export async function getActiveProposals(
   ) {
     id
 		title
+		description
+		slug
     statusChanges {
       type
     }
@@ -26,26 +28,16 @@ export async function getActiveProposals(
   }
 }`;
 
-	const governorProposalsDocumentLean = `
-		query GovernanceProposals( $chainId: ChainID!,  $governanceIds: [AccountID!]) {
-  proposals(
-    chainId: $chainId
-    governanceIds: $governanceIds
-  ) {
-    id
-		title
-  }
-}`;
+
 
   const result = await fetcher({
-		query: lean ? governorProposalsDocumentLean: governorProposalsDocument,
+		query: governorProposalsDocument,
     variables: {
 			chainId,
 			governanceIds
     },
 	});
 
-	if(lean) return result.proposals
 	const activeProposals = cleanActiveProposals(result.proposals)
 	return activeProposals
 }
@@ -65,7 +57,7 @@ function cleanActiveProposals(proposals: Proposal[]) {
 				}
 				curr.voteStats[index] = newItem
 			})
-      newProposals.push(curr)
+      newProposals.push()
 		}
 
 	}

@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
           {
             label: "Vote",
             action: "link",
-            target: `https://www.tally.xyz/gov/arbitrum/proposal/${current.id}?chart=bubble`
+            target: `https://www.tally.xyz/gov/${current.slug}/proposal/${current.id}?chart=bubble`
           },
           {
             label: "All Proposals",
@@ -203,7 +203,7 @@ export async function POST(request: NextRequest) {
     console.log({currentGovernanceIds})
 
     const start = performance.now()
-    const activeProposals = await getActiveProposals(chainId, currentGovernanceIds, true)
+    const activeProposals = await getActiveProposals(chainId, currentGovernanceIds)
 
     const end = performance.now()
     const time = end - start
@@ -224,7 +224,7 @@ export async function POST(request: NextRequest) {
         {
           label: "Vote",
           action: "link",
-          target: `https://www.tally.xyz/gov/arbitrum/proposal/${activeProposals[0].id}?chart=bubble`
+          target: `https://www.tally.xyz/gov/${activeProposals[0].slug}/proposal/${activeProposals[0].id}?chart=bubble`
         },
         {
           label: "All Proposals",
