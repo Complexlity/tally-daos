@@ -155,10 +155,6 @@
   },
   {
     "name": "Exodus Town",
-    "slug": "exodus-town",
-    "metadata": {
-      "icon": "https://static.tally.xyz/c1e5dfa1-3073-458c-8e7d-86ad80468765_original.png"
-    },
     "governances": [
       {
         "id": "eip155:137:0x7E96f5242D1256E56E15b46EB2Fa1b1152dF5923",
