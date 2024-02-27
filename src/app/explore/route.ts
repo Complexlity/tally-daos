@@ -3,7 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 
 // Opt out of caching for all data requests in the route segment
 
-const startImageUrl = `${process.env.HOST}/images/start`;
+
+
+export async function POST(request: NextRequest) {
+
+
+const startImageUrl = `${process.env.HOST}/images/explore`;
 
 const initialFrame: Frame = {
   image: startImageUrl,
@@ -20,12 +25,7 @@ const initialFrame: Frame = {
 };
 
 
-export async function POST(request: NextRequest) {
-  const body = await request.json();
-  const buttonId = body.untrustedData.buttonIndex;
-  const inputText = body.untrustedData.inputText;
 
-  const inputTextAsNumber = Number(inputText);
 
   return new NextResponse(getFrameHtml(initialFrame), {
         status: 200,
