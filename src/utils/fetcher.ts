@@ -1,4 +1,4 @@
-export async function fetcher({ query, variables }: {query: string, variables: string}) {
+export async function fetcher({ query, variables }: {query: string, variables: {chainId: string} & any}) {
   return fetch(process.env.TALLY_API_URL!, {
 		method: "POST",
 		//@ts-expect-error
