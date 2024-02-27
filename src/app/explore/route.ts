@@ -90,7 +90,7 @@ export async function POST(request: NextRequest) {
           {
             label: "Vote",
             action: "link",
-            target: `https://www.tally.xyz/gov/${current.slug}/proposal/${current.id}?chart=bubble`
+            target: `https://www.tally.xyz/gov/${current.governance.slug}/proposal/${current.id}?chart=bubble`
           },
           {
             label: "All Proposals",
@@ -103,7 +103,7 @@ export async function POST(request: NextRequest) {
           {
             label: "Vote",
             action: "link",
-            target: `https://www.tally.xyz/gov/arbitrum/proposal/${current.id}?chart=bubble`
+            target: `https://www.tally.xyz/gov/${current.governance.slug}/proposal/${current.id}?chart=bubble`
           },
           {
             label: "Next",
@@ -224,7 +224,7 @@ export async function POST(request: NextRequest) {
         {
           label: "Vote",
           action: "link",
-          target: `https://www.tally.xyz/gov/${activeProposals[0].slug}/proposal/${activeProposals[0].id}?chart=bubble`
+          target: `https://www.tally.xyz/gov/${activeProposals[0].governance.slug}/proposal/${activeProposals[0].id}?chart=bubble`
         },
         {
           label: "All Proposals",
