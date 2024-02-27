@@ -20,8 +20,7 @@ export async function GET() {
           alignItems: "center",
         }}
       >
-				<h1>There was no active proposal found </h1>
-				<p>Might be due to delayed onchain data syncing</p>
+        No Proposal Found. Might be due to delayed on chain data syncing.
       </div>
     ),
     {
