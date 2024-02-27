@@ -13,8 +13,7 @@ export async function getActiveProposals(
   ) {
     id
 		title
-		description
-		slug
+		# description
     statusChanges {
       type
     }
@@ -24,6 +23,10 @@ export async function getActiveProposals(
       support
       percent
     }
+		governance{
+			name
+			slug
+		}
   }
 }`;
 
@@ -36,7 +39,6 @@ export async function getActiveProposals(
 			governanceIds
     },
 	});
-	
 
 	const activeProposals = cleanActiveProposals(result.proposals)
 	return activeProposals
@@ -57,7 +59,7 @@ function cleanActiveProposals(proposals: Proposal[]) {
 				}
 				curr.voteStats[index] = newItem
 			})
-      newProposals.push()
+      newProposals.push(curr)
 		}
 
 	}
