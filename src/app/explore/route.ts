@@ -219,7 +219,7 @@ export async function POST(request: NextRequest) {
          version: "vNext",
          buttons: [
            {
-             label: "Explore",
+             label: "Explore Others",
              action: "post",
            },
          ],
