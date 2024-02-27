@@ -110,7 +110,7 @@ export async function POST(request: NextRequest) {
             action: "post"
           },
           {
-            label: "Proposals",
+            label: "All Proposals",
             action: "post"
           }
         ]
@@ -245,7 +245,7 @@ export async function POST(request: NextRequest) {
           action: "post"
         },
         {
-          label: "Proposals",
+          label: "All Proposals",
           action: "post"
         }
       ]
