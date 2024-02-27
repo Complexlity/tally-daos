@@ -3,8 +3,7 @@ import { fetcher } from "./fetcher";
 
 export async function getActiveProposals(
   chainId: string,
-	governanceIds : string[],
-	lean = false
+	governanceIds : string[]
 ) {
   const governorProposalsDocument = `
 		query GovernanceProposals( $chainId: ChainID!,  $governanceIds: [AccountID!]) {
@@ -37,6 +36,7 @@ export async function getActiveProposals(
 			governanceIds
     },
 	});
+	
 
 	const activeProposals = cleanActiveProposals(result.proposals)
 	return activeProposals

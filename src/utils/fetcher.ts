@@ -14,6 +14,7 @@ export async function fetcher({ query, variables }: {query: string, variables: {
     .then((response) => response.json())
     .then((json) => {
       if (json?.errors) {
+        console.log(json?.errors)
         console.error("error when fetching");
 
         return null;
