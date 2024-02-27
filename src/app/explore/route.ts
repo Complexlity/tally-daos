@@ -238,7 +238,7 @@ export async function POST(request: NextRequest) {
         {
           label: "Vote",
           action: "link",
-          target: `https://www.tally.xyz/gov/arbitrum/proposal/${activeProposals[0].id}?chart=bubble`
+          target: `https://www.tally.xyz/gov/${activeProposals[0].governance.slug}/proposal/${activeProposals[0].id}?chart=bubble`
         },
         {
           label: "Next",
