@@ -211,7 +211,29 @@ export async function POST(request: NextRequest) {
     const end = performance.now()
     const time = end - start
     console.log("Time", time)
+    if (activeProposals.length === 0) {
+       let imageUrl = `${process.env.HOST}/images/error`;
 
+       let returnedFrame: Frame & { state?: string } = {
+         image: imageUrl,
+         version: "vNext",
+         buttons: [
+           {
+             label: "Explore",
+             action: "post",
+           },
+         ],
+         postUrl: `${process.env.HOST}/explore`,
+         ogImage: imageUrl,
+
+       };
+
+       return new NextResponse(getFrameHtml(returnedFrame), {
+         status: 200,
+         headers: { "content-type": "text/html" },
+       });
+
+    }
 
 
     imageUrl = `${process.env.HOST}/images/explore?page=review`;
@@ -221,6 +243,8 @@ export async function POST(request: NextRequest) {
       slug: current.slug,
       next: 1,
     }
+
+
 
     let returnedButtons;
     const proposalId = activeProposals[0]?.id
