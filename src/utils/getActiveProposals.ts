@@ -64,7 +64,7 @@ function cleanActiveProposals(proposals: Proposal[]) {
 }
 
 function isActive(statusChanges: StatusChange[]) {
-	const wrongTypes = [Type.Defeated, Type.Empty, Type.Executed, Type.Queued, Type.Succeeded]
+	const wrongTypes = [Type.Defeated, Type.Empty, Type.Executed, Type.Queued, Type.Succeeded, Type.Canceled]
 	for (let i = 0; i < statusChanges.length; i++){
 		const curr = statusChanges[i]
 		if (wrongTypes.includes(curr.type)) {

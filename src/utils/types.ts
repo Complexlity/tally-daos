@@ -94,6 +94,7 @@ export enum Type {
   Pending = "PENDING",
   Queued = "QUEUED",
   Succeeded = "SUCCEEDED",
+  Canceled = "CANCELED",
 }
 
 export interface VoteStat {

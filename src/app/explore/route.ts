@@ -210,7 +210,7 @@ export async function POST(request: NextRequest) {
     const end = performance.now()
     const time = end - start
     console.log("Time", time)
-    console.log({ activeProposals })
+    
 
 
     imageUrl = `${process.env.HOST}/images/explore?page=review`;
