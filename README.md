@@ -3,7 +3,7 @@
 - Query https://www.tally.xyz/api/search-daos
 (returns {governances: [...]} )
 
-Found in [src\utils\getActiveProposalsOrganizations.ts](src\utils\getActiveProposalsOrganizations.ts)
+Found in [src/utils/getActiveProposalsOrganizations.ts](src/utils/getActiveProposalsOrganizations.ts)
 
 **Update**:
 The search-daos api route does not display all the active organizations. Using this endpoint instead:
@@ -34,7 +34,7 @@ query ExploreOrgs($input: OrganizationsInput!) {
   }
 }
 `
-Found in: [src\utils\getOrganizations.ts](src\utils\getOrganizations.ts)
+Found in: [src/utils/getOrganizations.ts](src/utils/getOrganizations.ts)
 
 - Clean data
 
