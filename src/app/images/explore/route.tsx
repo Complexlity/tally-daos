@@ -42,7 +42,7 @@ export async function GET() {
           </div>
           {/* Data Row */}
           {/* @ts-expect-error */}
-          {activeProposalOrganizations.slice(0, 10).map((proposal, index) => (
+          {activeProposalOrganizations.map((proposal, index) => (
             <div
               key={index}
               style={{
