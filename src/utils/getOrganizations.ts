@@ -22,6 +22,7 @@ export async function getOrganizations(
     nodes {
       ... on Organization {
         name
+        slug
         chainIds
         activeProposalsCount
         votersCount
@@ -55,11 +56,13 @@ const filteredNodes = nodes.filter((node) => node.activeProposalsCount > 0);
 	filteredNodes.sort((b, a) => a.votersCount - b.votersCount);
 	if (lean) {
 		const newNodes = []
-		for (let i = 0; i < filteredNodes.length; i++){
+    for (let i = 0; i < filteredNodes.length; i++){
+      if (i == 10) break
 			const curr = filteredNodes[i]
 			const newCurr = {
-				chainIds: curr.chainIds,
-				governorIds: curr.governorIds
+				chainId: curr.chainIds[0],
+        governorIds: curr.governorIds,
+        slug: curr.slug
 			}
 			newNodes.push(newCurr)
 		}
