@@ -5,9 +5,10 @@ import { PickedOrgs } from "@/utils/types";
 import { Frame, FrameButton } from "frames.js";
 import { NextRequest, NextResponse } from "next/server";
 import dummyState from "@/utils/dummyState.json";
+import { getOrganizations } from "@/utils/getOrganizations";
 
 // Opt out of caching for all data requests in the route segment
-type State = PickedOrgs;
+type State = {chainId: string, governorIds: string[], slug: string}[];
 
 export async function POST(request: NextRequest) {
   const body = await request.json();
@@ -49,8 +50,9 @@ export async function POST(request: NextRequest) {
     }
 
     if (state.last || buttonIndex == 3) {
-      let startState =
-        (await getActiveProposalOrganizations()) as unknown as State;
+      let fullState =
+        (await getOrganizations(true))
+      let startState = fullState.orgs as unknown as State
       let imageUrl = `${process.env.HOST}/images/explore?page=explore`;
       const nextState = `${encodeURIComponent(JSON.stringify(startState))}`;
 
@@ -59,11 +61,11 @@ export async function POST(request: NextRequest) {
         version: "vNext",
         buttons: [
           {
-            label: "Go",
+            label: "Browse Proposal",
             action: "post",
           },
         ],
-        inputText: "Enter chain number e.g 1, 2, 5",
+        inputText: "ID e.g 1 for " + fullState.firstOrgName ,
         postUrl: `${process.env.HOST}/explore?page=review`,
         ogImage: imageUrl,
         state: nextState,
@@ -150,12 +152,15 @@ export async function POST(request: NextRequest) {
 
 
   let state: State;
+  let fullState: {firstOrgName: string, orgs: State}
   if (!serializedState) {
     // state =
     //   JSON.parse(decodeURIComponent(dummyState[0])) as unknown as State
-    state = (await getActiveProposalOrganizations()) as unknown as State;
+    fullState = (await getOrganizations(true)) as unknown as { firstOrgName: string, orgs: State };
+    state = fullState.orgs
   } else {
     state = JSON.parse(decodeURIComponent(serializedState)) as unknown as State;
+    fullState = {firstOrgName: "Arbitrum", orgs: state}
   }
 
 
@@ -168,11 +173,11 @@ export async function POST(request: NextRequest) {
     version: "vNext",
     buttons: [
       {
-        label: "Go",
+        label: "Browse Proposal",
         action: "post",
       },
     ],
-    inputText: "Enter chain number e.g 1, 2, 5",
+    inputText: "ID e.g 1 for " + fullState.firstOrgName,
     postUrl: `${process.env.HOST}/explore?page=review`,
     ogImage: imageUrl,
     state: nextState,
@@ -191,11 +196,9 @@ export async function POST(request: NextRequest) {
     }
 
     const current = state[inputTextNumber - 1];
-    let chainId = current.governances[0].id.split(":").slice(0, 2).join(":");
+    let chainId = current.chainId
 
-    const currentGovernanceIds = current.governances.map((gov) => {
-      return gov.id;
-    });
+    const currentGovernanceIds = current.governorIds;
 
 
     const start = performance.now();
@@ -207,7 +210,7 @@ export async function POST(request: NextRequest) {
     const end = performance.now();
     const time = end - start;
     if (activeProposals.length === 0) {
-      let imageUrl = `${process.env.HOST}/images/error`;
+      let imageUrl = `${process.env.HOST}/images/no-proposal-found`;
 
       let returnedFrame: Frame & { state?: string } = {
         image: imageUrl,
@@ -228,7 +231,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    imageUrl = `${process.env.HOST}/images/explore?page=review`;
+    imageUrl = `${process.env.HOST}/images/review`;
     const newState: {
       chainId: string;
       governanceIds: string[];
