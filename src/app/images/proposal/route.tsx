@@ -11,6 +11,8 @@ export async function GET(request: NextRequest) {
   const { searchParams } = new URL(request.url)
   const chainId = searchParams.get('id') as string
   const govId = searchParams.get('govs') as string
+  console.log({ chainId })
+  console.log({govId})
   let curr = Number(searchParams.get('curr'))
   if(isNaN(curr)) curr = 0
 

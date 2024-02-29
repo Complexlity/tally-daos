@@ -80,6 +80,7 @@ export async function POST(request: NextRequest) {
       state.chainId,
       state.governanceIds
     );
+    
     const current = activeProposals[state.next];
     const next = activeProposals[state.next + 1];
 
