@@ -12,13 +12,19 @@ export async function GET(request: NextRequest) {
   const chainId = searchParams.get('id') as string
   const govId = searchParams.get('govs') as string
   let curr = Number(searchParams.get('curr'))
-  if(isNaN(curr)) curr = 0
+  if (isNaN(curr)) curr = 0
+
 
   const activeProposals = await getActiveProposals(
     chainId,
     [govId]
   );
+
+  console.log(chainId, govId)
+  console.log({ activeProposals })
+  console.log({curr})
   const current = activeProposals[Number(curr)];
+  console.log({current})
 
 
   return new ImageResponse(

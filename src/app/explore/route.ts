@@ -84,7 +84,7 @@ export async function POST(request: NextRequest) {
     const current = activeProposals[state.next];
     const next = activeProposals[state.next + 1];
 
-    let imageUrl = `${process.env.HOST}/images/proposal?id=${state.chainId}&govs=${state.governanceIds[0]}=&curr=${next}`;
+    let imageUrl = `${process.env.HOST}/images/proposal?id=${state.chainId}&govs=${state.governanceIds[0]}&curr=${next}`;
     const newState: {
       chainId: string;
       governanceIds: string[];
@@ -196,24 +196,28 @@ export async function POST(request: NextRequest) {
       });
     }
 
+    console.log({state})
     let curr = inputTextNumber - 1
+    console.log({curr})
     const current = state[curr];
+    console.log({current})
     let chainId = current.chainId
-
-    const currentGovernanceIds = current.governorIds;
-
+    console.log({chainId})
+    const currentGovernorIds = current.governorIds;
+    console.log({currentGovernorIds})
 
     const start = performance.now();
     const activeProposals = await getActiveProposals(
       chainId,
-      currentGovernanceIds
+      currentGovernorIds
     );
+    console.log({activeProposals})
 
     const end = performance.now();
     const time = end - start;
     if (activeProposals.length === 0) {
       let imageUrl = `${process.env.HOST}/images/no-proposal-found`;
-
+      const nextState = `${encodeURIComponent(JSON.stringify(state))}`;
       let returnedFrame: Frame & { state?: string } = {
         image: imageUrl,
         version: "vNext",
@@ -225,6 +229,7 @@ export async function POST(request: NextRequest) {
         ],
         postUrl: `${process.env.HOST}/explore`,
         ogImage: imageUrl,
+        state: nextState,
       };
 
       return new NextResponse(getFrameHtml(returnedFrame), {
@@ -233,7 +238,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    imageUrl = `${process.env.HOST}/images/proposal?id=${chainId}&govs=${currentGovernanceIds[0]}=&curr=${curr}`;
+    imageUrl = `${process.env.HOST}/images/proposal?id=${chainId}&govs=${currentGovernorIds[0]}`;
     const newState: {
       chainId: string;
       governanceIds: string[];
@@ -242,7 +247,7 @@ export async function POST(request: NextRequest) {
       last?: boolean;
     } = {
       chainId,
-      governanceIds: currentGovernanceIds,
+      governanceIds: currentGovernorIds,
       slug: current.slug,
       next: 1,
     };
