@@ -1,4 +1,3 @@
-import { getActiveProposalOrganizations } from "@/utils/getActiveProposalsOrganizations";
 import { Frame, getFrameFlattened } from "frames.js";
 import type { Metadata } from "next";
 
@@ -30,6 +29,5 @@ export const metadata: Metadata = {
 };
 
 export default async function Page() {
-  const proposals = await getActiveProposalOrganizations();
-  return <div>{JSON.stringify(proposals)}</div>;
+  return <div>Find all active proposals on tally</div>;
 }
