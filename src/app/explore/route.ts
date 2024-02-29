@@ -80,11 +80,11 @@ export async function POST(request: NextRequest) {
       state.chainId,
       state.governanceIds
     );
-    
+
     const current = activeProposals[state.next];
     const next = activeProposals[state.next + 1];
 
-    let imageUrl = `${process.env.HOST}/images/proposal?id=${state.chainId}&govs=${state.governanceIds[0]}^=&curr=${next}`;
+    let imageUrl = `${process.env.HOST}/images/proposal?id=${state.chainId}&govs=${state.governanceIds[0]}=&curr=${next}`;
     const newState: {
       chainId: string;
       governanceIds: string[];
@@ -233,7 +233,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    imageUrl = `${process.env.HOST}/images/proposal?id=${chainId}&govs=${currentGovernanceIds[0]}^=&curr=${curr}`;
+    imageUrl = `${process.env.HOST}/images/proposal?id=${chainId}&govs=${currentGovernanceIds[0]}=&curr=${curr}`;
     const newState: {
       chainId: string;
       governanceIds: string[];
