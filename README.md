@@ -1,36 +1,95 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Tally Active Daos
 
-## Getting Started
+- Query https://www.tally.xyz/api/search-daos
+(returns {governances: [...]} )
 
-First, run the development server:
+Found in [src\utils\getActiveProposalsOrganizations.ts](src\utils\getActiveProposalsOrganizations.ts)
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+**Update**:
+The search-daos api route does not display all the active organizations. Using this endpoint instead:
+
+`
+query ExploreOrgs($input: OrganizationsInput!) {
+  organizations(input: $input) {
+    nodes {
+      ... on Organization {
+        id
+        slug
+        name
+        chainIds
+        proposalsCount
+        activeProposalsCount
+        tokenHoldersCount
+        votersCount
+        governorIds
+        metadata {
+          icon
+        }
+      }
+    }
+    pageInfo {
+      firstCursor
+      lastCursor
+    }
+  }
+}
+`
+Found in: [src\utils\getOrganizations.ts](src\utils\getOrganizations.ts)
+
+- Clean data
+
+- Query Proposals with each chain id using the gql query below
+```
+query GovernanceProposals( $chainId: ChainID!,  $governanceIds: [AccountID!]) {
+  proposals(
+    chainId: $chainId
+    governanceIds: $governanceIds
+  ) {
+    id
+    description
+    statusChanges {
+      type
+    }
+    block {
+      timestamp
+    }
+    voteStats {
+      votes
+      weight
+      support
+      percent
+    }
+
+    governance {
+      id
+      quorum
+      name
+      timelockId
+      organization {
+        metadata {
+          icon
+        }
+      }
+      tokens {
+        decimals
+      }
+    }
+    tallyProposal {
+      id
+      createdAt
+      status
+    }
+  }
+}
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Found in [src\utils\getActiveProposals.ts](src\utils\getActiveProposals.ts)
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- Display on frame image for user
 
-## Learn More
+## Current State
+- Some daos (optimism, reflex, etc) does not reflect the correct data due to syncing
+-
 
-To learn more about Next.js, take a look at the following resources:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.

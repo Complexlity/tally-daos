@@ -1,7 +1,39 @@
 - Query https://www.tally.xyz/api/search-daos
 (returns {governances: [...]} )
 
-- Clean with active.js
+**Update**:
+The search-daos api route does not display all the active organizations. Using this instead
+
+`
+query ExploreOrgs($input: OrganizationsInput!) {
+  organizations(input: $input) {
+    nodes {
+      ... on Organization {
+        id
+        slug
+        name
+        chainIds
+        proposalsCount
+        activeProposalsCount
+        tokenHoldersCount
+        votersCount
+        governorIds
+        metadata {
+          icon
+        }
+      }
+    }
+    pageInfo {
+      firstCursor
+      lastCursor
+    }
+  }
+}
+`
+
+
+
+- Clean data
 
 - Query Proposals with each chain id using the gql query below
 ```
@@ -48,35 +80,11 @@ query GovernanceProposals( $chainId: ChainID!,  $governanceIds: [AccountID!]) {
 }
 ```
 
+
+
 - Display on frame image for user
 
 ## Current State
 - Some daos (optimism, reflex, etc) does not reflect the correct data due to syncing
 - All other things work okay and next is to complete the images
 
-`
-query ExploreOrgs($input: OrganizationsInput!) {
-  organizations(input: $input) {
-    nodes {
-      ... on Organization {
-        id
-        slug
-        name
-        chainIds
-        proposalsCount
-        activeProposalsCount
-        tokenHoldersCount
-        votersCount
-        governorIds
-        metadata {
-          icon
-        }
-      }
-    }
-    pageInfo {
-      firstCursor
-      lastCursor
-    }
-  }
-}
-`
