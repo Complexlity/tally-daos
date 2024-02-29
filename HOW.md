@@ -49,3 +49,34 @@ query GovernanceProposals( $chainId: ChainID!,  $governanceIds: [AccountID!]) {
 ```
 
 - Display on frame image for user
+
+## Current State
+- Some daos (optimism, reflex, etc) does not reflect the correct data due to syncing
+- All other things work okay and next is to complete the images
+
+`
+query ExploreOrgs($input: OrganizationsInput!) {
+  organizations(input: $input) {
+    nodes {
+      ... on Organization {
+        id
+        slug
+        name
+        chainIds
+        proposalsCount
+        activeProposalsCount
+        tokenHoldersCount
+        votersCount
+        governorIds
+        metadata {
+          icon
+        }
+      }
+    }
+    pageInfo {
+      firstCursor
+      lastCursor
+    }
+  }
+}
+`
