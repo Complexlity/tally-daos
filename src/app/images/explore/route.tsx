@@ -1,4 +1,3 @@
-import { getActiveProposalOrganizations } from "@/utils/getActiveProposalsOrganizations";
 import { getOrganizations } from "@/utils/getOrganizations";
 import { ImageResponse } from "next/og";
 // App router includes @vercel/og.
@@ -19,7 +18,7 @@ export async function GET() {
           alignItems: "center",
           backgroundColor: "white",
           fontWeight: 600,
-          fontSize: 30
+          fontSize: 30,
         }}
       >
         <div
@@ -87,7 +86,7 @@ export async function GET() {
             gap: "2px",
             position: "absolute",
             bottom: 0,
-            fontSize: 28
+            fontSize: 28,
           }}
         >
           Enter ID in the input and click <span> GO </span> to browse
@@ -97,6 +96,11 @@ export async function GET() {
     {
       width: 1200,
       height: 630,
+      headers: {
+        "Cache-Control": "public, s-maxage=1",
+        "CDN-Cache-Control": "public, s-maxage=60",
+        "Vercel-CDN-Cache-Control": "public, s-maxage=3600",
+      },
     }
   );
 }

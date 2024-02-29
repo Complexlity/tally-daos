@@ -53,7 +53,7 @@ export async function POST(request: NextRequest) {
       let fullState =
         (await getOrganizations(true))
       let startState = fullState.orgs as unknown as State
-      let imageUrl = `${process.env.HOST}/images/explore?page=explore`;
+      let imageUrl = `${process.env.HOST}/images/explore`;
       const nextState = `${encodeURIComponent(JSON.stringify(startState))}`;
 
       let returnedFrame: Frame & { state?: string } = {
@@ -83,7 +83,7 @@ export async function POST(request: NextRequest) {
     const current = activeProposals[state.next];
     const next = activeProposals[state.next + 1];
 
-    let imageUrl = `${process.env.HOST}/images/explore?page=proposals&curr=${next}`;
+    let imageUrl = `${process.env.HOST}/images/proposal?id=${state.chainId}&govs=${state.governanceIds[0]}^=&curr=${next}`;
     const newState: {
       chainId: string;
       governanceIds: string[];
@@ -165,7 +165,7 @@ export async function POST(request: NextRequest) {
 
 
   let imageUrl: string;
-  imageUrl = `${process.env.HOST}/images/explore?page=explore`;
+  imageUrl = `${process.env.HOST}/images/explore`;
   const nextState = `${encodeURIComponent(JSON.stringify(state))}`;
 
   returnedFrame = {
@@ -195,7 +195,8 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    const current = state[inputTextNumber - 1];
+    let curr = inputTextNumber - 1
+    const current = state[curr];
     let chainId = current.chainId
 
     const currentGovernanceIds = current.governorIds;
@@ -231,7 +232,7 @@ export async function POST(request: NextRequest) {
       });
     }
 
-    imageUrl = `${process.env.HOST}/images/review`;
+    imageUrl = `${process.env.HOST}/images/proposal?id=${chainId}&govs=${currentGovernanceIds[0]}^=&curr=${curr}`;
     const newState: {
       chainId: string;
       governanceIds: string[];
