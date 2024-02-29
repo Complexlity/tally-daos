@@ -9,8 +9,8 @@ export async function GET() {
     (
       <div
         style={{
-          fontSize: 40,
-          color: "black",
+          fontSize: 60,
+          color: "Red",
           background: "white",
           width: "100%",
           height: "100%",
@@ -18,6 +18,7 @@ export async function GET() {
           textAlign: "center",
           justifyContent: "center",
           alignItems: "center",
+          backgroundImage: "linear-gradient(to bottom, #fff, #d1a7e2)",
         }}
       >
         No Proposal Found. Might be due to delayed on chain data syncing.

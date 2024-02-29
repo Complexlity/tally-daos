@@ -7,6 +7,8 @@ export const runtime = "edge";
 
 export async function GET() {
   const activeProposalOrganizations = await getOrganizations()
+
+  
   return new ImageResponse(
     (
       <div
